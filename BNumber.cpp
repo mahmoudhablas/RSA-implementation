@@ -373,7 +373,11 @@ public:
         for(int i=0;i<=data.size()-1;i++){
             carry = 0ll;
             for (int j=0;j<a->data.size() || carry > 0;j++) {
-                unsigned long long s = ans->data[i+j] + carry + (unsigned long long)data[i]*(j < a->data.size() ? (unsigned long long)a->data[j] : 0ll);
+                unsigned long long s = ans->data[i+j] + carry ;
+                if (j < a->data.size())
+                {
+                    s +=  (unsigned long long)data[i] * (unsigned long long)a->data[j];
+                }
                 ans->data[i+j] = s % base;
                 carry = s / base;
             }
