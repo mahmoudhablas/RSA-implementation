@@ -181,6 +181,7 @@ public:
         qou->removezeros();
         return qou;
     }
+    //////////constructor takes int ////////////
     BNumber(int x) {
         if(x < 0 )
         {
@@ -228,7 +229,7 @@ public:
         printf("%d", (data.size() == 0) ? 0 : data.back());
         for (int i=data.size()-2;i>=0;i--) printf("%09d", data[i]);
     }
-
+    // get moduls of the BNumber //////////
     BNumber *abs()
     {
         BNumber *abs = new BNumber();
@@ -265,7 +266,30 @@ public:
     }
     bool Less (BNumber *a)
     {
-        return !( Greater(a));
+        removezeros();
+        a->removezeros();
+        if(sign == true && a->getSign() == false)
+            return true;
+        if(sign == false && a->getSign() == true)
+            return false;
+        if (a->data.size() > this->data.size())
+        {
+            return true;
+        }else if(a->data.size() < this->data.size())
+        {
+            return false;
+        }else{
+            for (int i = a->data.size()-1; i >=0; --i)
+            {
+                if (a->data[i] < this->data[i])
+                {
+                    return false;
+                }else if(a->data[i] > this->data[i]){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
     bool Equal(BNumber *a)
     {
